@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Bienvenida</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .button {
+      display: inline-block;
+      margin: 20px;
+      padding: 15px 25px;
+      font-size: 18px;
+      color: white;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <!-- Página de Bienvenida -->
+  <div id="homePage">
+    <h1>Bienvenido</h1>
+    <p>Seleccione una opción:</p>
+    <a href="tel:911" class="button">Conectar con el 911</a>
+    <button class="button" onclick="showServicesPage()">Ver Servicios del 070</button>
+  </div>
+
+  <!-- Página de Servicios -->
+  <div id="servicesPage" style="display: none;">
+    <h1>Servicios del 070</h1>
+    <ul>
+      <li><button class="button" onclick="openChat('Orientación')">Orientación</button></li>
+      <li><button class="button" onclick="openChat('Reportes')">Reportes</button></li>
+      <li><button class="button" onclick="openChat('Quejas')">Quejas</button></li>
+      <li><button class="button" onclick="openChat('Solicitudes')">Solicitudes</button></li>
+      <li><button class="button" onclick="openChat('Acompañamiento')">Acompañamiento</button></li>
+      <li><button class="button" onclick="openChat('Asesoría Especializada')">Asesoría Especializada</button></li>
+    </ul>
+    <button class="button" onclick="showHomePage()">Volver al inicio</button>
+  </div>
+
+  <!-- Chat -->
+  <div id="chatBox" style="display: none;">
+    <h1>Chat</h1>
+    <p id="chatTitle">Servicio: </p>
+    <textarea id="chatInput" rows="5" cols="30" placeholder="Escribe tu pregunta aquí..."></textarea><br>
+    <button class="button" onclick="sendChat()">Enviar</button>
+    <button class="button" onclick="closeChat()">Cerrar Chat</button>
+  </div>
+
+  <script>
+    function showServicesPage() {
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('servicesPage').style.display = 'block';
+    }
+
+    function showHomePage() {
+      document.getElementById('servicesPage').style.display = 'none';
+      document.getElementById('chatBox').style.display = 'none';
+      document.getElementById('homePage').style.display = 'block';
+    }
+
+    function openChat(serviceName) {
+      document.getElementById('servicesPage').style.display = 'none';
+      document.getElementById('chatBox').style.display = 'block';
+      document.getElementById('chatTitle').innerText = `Servicio: ${serviceName}`;
+    }
+
+    function closeChat() {
+      document.getElementById('chatBox').style.display = 'none';
+      document.getElementById('servicesPage').style.display = 'block';
+    }
+
+    function sendChat() {
+      const question = document.getElementById('chatInput').value;
+      if (question) {
+        alert(`Pregunta enviada: "${question}"`);
+        document.getElementById('chatInput').value = '';
+      } else {
+        alert('Por favor, escribe una pregunta.');
+      }
+    }
+  </script>
+</body>
+</html>
